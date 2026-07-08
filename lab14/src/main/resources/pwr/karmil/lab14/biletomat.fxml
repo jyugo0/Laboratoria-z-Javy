@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="684.0" style="-fx-background-color: darkblue;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pwr.karmil.lab14.gui.stanowiskaController">
+   <children>
+      <Pane layoutX="25.0" layoutY="16.0" prefHeight="369.0" prefWidth="211.0" style="-fx-border-color: #e4e7d8;">
+         <children>
+            <Label layoutX="42.0" layoutY="14.0" text="Stanowisko 1" textFill="#e4e7d8">
+               <font>
+                  <Font name="Cooper Black" size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="63.0" layoutY="72.0" text="Obecna sprawa:" textFill="#e4e7d8" />
+            <Label layoutX="78.0" layoutY="134.0" text="Kategoria:" textFill="#e4e7d8" />
+            <Label fx:id="case1Label" layoutX="92.0" layoutY="98.0" text="---" textFill="#e4e7d8" />
+            <Label fx:id="category1Label" layoutX="92.0" layoutY="168.0" text="---" textFill="#e4e7d8" />
+            <Button fx:id="confirm1Btn" layoutX="51.0" layoutY="225.0" mnemonicParsing="false" onAction="#onConfirmBtnClicked" prefHeight="25.0" prefWidth="96.0" style="-fx-background-color: #e4e7d8;" text="Zatwierdź" textFill="#2527c7">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Button>
+            <ChoiceBox fx:id="changeCategoriesChoiceBox" layoutX="24.0" layoutY="286.0" prefWidth="150.0" style="-fx-background-color: #e4e7d8;" />
+            <Button fx:id="addBtn" layoutX="25.0" layoutY="320.0" mnemonicParsing="false" onAction="#onAddBtn" style="-fx-background-color: #e4e7d8;" text="Dodaj" textFill="#2527c7">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Button>
+            <Button fx:id="delBtn" layoutX="121.0" layoutY="320.0" mnemonicParsing="false" onAction="#onDelBtnClicked" style="-fx-background-color: #e4e7d8;" text="Usuń" textFill="#2527c7">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Button>
+         </children>
+      </Pane>
+      <Pane layoutX="447.0" layoutY="16.0" prefHeight="369.0" prefWidth="211.0" style="-fx-border-color: #e4e7d8;">
+         <children>
+            <Label layoutX="42.0" layoutY="14.0" text="Stanowisko 3" textFill="#e4e7d8">
+               <font>
+                  <Font name="Cooper Black" size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="63.0" layoutY="69.0" text="Obecna sprawa:" textFill="#e4e7d8" />
+            <Label layoutX="79.0" layoutY="133.0" text="Kategoria:" textFill="#e4e7d8" />
+            <Label fx:id="case3Label" layoutX="99.0" layoutY="98.0" text="---" textFill="#e4e7d8" />
+            <Label fx:id="category3Label" layoutX="98.0" layoutY="168.0" text="---" textFill="#e4e7d8" />
+            <Button fx:id="confirm3Btn" layoutX="57.0" layoutY="222.0" mnemonicParsing="false" onAction="#onConfirmBtnClicked" prefHeight="25.0" prefWidth="96.0" style="-fx-background-color: #e4e7d8;" text="Zatwierdź" textFill="#2527c7">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Button>
+            <ChoiceBox fx:id="changeCategoriesChoiceBox3" layoutX="30.0" layoutY="291.0" prefWidth="150.0" style="-fx-background-color: #e4e7d8;" />
+            <Button fx:id="addBtn3" layoutX="30.0" layoutY="322.0" mnemonicParsing="false" onAction="#onAddBtn3" style="-fx-background-color: #e4e7d8;" text="Dodaj" textFill="#2527c7">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Button>
+            <Button fx:id="delBtn3" layoutX="132.0" layoutY="322.0" mnemonicParsing="false" onAction="#onDelBtn3Clicked" style="-fx-background-color: #e4e7d8;" text="Usuń" textFill="#2527c7">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Button>
+         </children>
+      </Pane>
+      <Pane layoutX="236.0" layoutY="16.0" prefHeight="369.0" prefWidth="211.0" style="-fx-border-color: #e4e7d8;">
+         <children>
+            <Label layoutX="43.0" layoutY="14.0" text="Stanowisko 2" textFill="#e4e7d8">
+               <font>
+                  <Font name="Cooper Black" size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="64.0" layoutY="69.0" text="Obecna sprawa:" textFill="#e4e7d8" />
+            <Label layoutX="79.0" layoutY="132.0" text="Kategoria:" textFill="#e4e7d8" />
+            <Label fx:id="case2Label" layoutX="98.0" layoutY="99.0" text="---" textFill="#e4e7d8" />
+            <Label fx:id="category2Label" layoutX="98.0" layoutY="168.0" text="---" textFill="#e4e7d8" />
+            <Button fx:id="confirm2Btn" layoutX="57.0" layoutY="223.0" mnemonicParsing="false" onAction="#onConfirmBtnClicked" prefHeight="25.0" prefWidth="96.0" style="-fx-background-color: #e4e7d8;" text="Zatwierdź" textFill="#2527c7">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Button>
+            <ChoiceBox fx:id="changeCategoriesChoiceBox2" layoutX="30.0" layoutY="290.0" prefWidth="150.0" style="-fx-background-color: #e4e7d8;" />
+            <Button fx:id="addBtn2" layoutX="32.0" layoutY="322.0" mnemonicParsing="false" onAction="#onAddBtn2" style="-fx-background-color: #e4e7d8;" text="Dodaj" textFill="#2527c7">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Button>
+            <Button fx:id="delBtn2" layoutX="135.0" layoutY="322.0" mnemonicParsing="false" onAction="#onDelBtn2Clicked" style="-fx-background-color: #e4e7d8;" text="Usuń" textFill="#2527c7">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Button>
+         </children>
+      </Pane>
+   </children>
+</Pane>
