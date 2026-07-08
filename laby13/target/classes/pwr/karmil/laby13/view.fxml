@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?language javascript?>
+
+<?import javafx.scene.chart.AreaChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.cell.MapValueFactory?>
+<?import javafx.scene.control.cell.TextFieldTableCell?>
+<?import javafx.scene.layout.Pane?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="503.0" prefWidth="902.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+
+    <fx:script>
+        function onCellEdit(event) {
+            var name = event.getTableColumn().getText();
+            event.getRowValue().put(name, event.getNewValue());
+            refreshChart();
+        }
+
+        function onDelColBtnClicked(event) {
+            var name = colNameTextField.getText();
+            if (name != null &amp;&amp; name.trim().length() === 0) {
+                var cols = table.getColumns();
+                for (var i = 0; i &lt; cols.size(); i++) {
+                    if (cols.get(i).getText().equals(name)) {
+                        cols.remove(i);
+                        refreshChart();
+                        break;
+                    }
+                }
+            }
+        }
+
+        function onAddColBtnClicked(event) {
+            var name = colNameTextField.getText();
+            if (name == null || name.trim().length() === 0) {
+                var num = table.getColumns().size()+1
+                name = "C"+num;
+            }
+
+            var cols = table.getColumns();
+            for (var i = 0; i &lt; cols.size(); i++) {
+                if (cols.get(i).getText().equals(name)) return;
+            }
+
+            var newCol = new javafx.scene.control.TableColumn(name);
+            newCol.setCellValueFactory(new javafx.scene.control.cell.MapValueFactory(name));
+            newCol.setCellFactory(javafx.scene.control.cell.TextFieldTableCell.forTableColumn());
+
+            newCol.setOnEditCommit(function (t) {
+                t.getRowValue().put(name, t.getNewValue());
+                refreshChart();
+            });
+
+            table.getColumns().add(newCol);
+            refreshChart();
+        }
+
+        function onAddRowBtnClicked(event) {
+            var newRow = new java.util.HashMap();
+            var cols = table.getColumns();
+
+            for (var i = 0; i &lt; cols.size(); i++) {
+                var colName = cols.get(i).getText();
+                newRow.put(colName, "");
+            }
+            dataList.add(newRow);
+            refreshChart();
+        }
+
+        function onDelRowBtnClicked(event) {
+            var selectedIndex = table.getSelectionModel().getSelectedIndex();
+            if (selectedIndex >= 0) {
+                dataList.remove(selectedIndex);
+                refreshChart();
+            }
+        }
+
+        function onTitleChanged(event) {
+            wykres.setTitle(titleTextField.getText());
+        }
+
+        function onXAxisChanged(event) {
+            xAxis.setLabel(xAxisInputTextField.getText());
+        }
+
+        var dataList = javafx.collections.FXCollections.observableArrayList();
+        var r1 = new java.util.HashMap();
+        r1.put("C1", "Styczeń");
+        r1.put("C2", "8");
+        r1.put("C3", "15");
+        var r2 = new java.util.HashMap();
+        r2.put("C1", "Luty");
+        r2.put("C2", "12");
+        r2.put("C3", "20");
+        var r3 = new java.util.HashMap();
+        r3.put("C1", "Marzec");
+        r3.put("C2", "17");
+        r3.put("C3", "25");
+        dataList.add(r1);
+        dataList.add(r2);
+        dataList.add(r3);
+
+        function refreshChart() {
+            wykres.getData().clear();
+            var columns = table.getColumns();
+            if (columns.size() &lt; 2) {
+                return;
+            }
+
+            var xName = columns.get(0).getText();
+            for (var c = 1; c &lt; columns.size(); c++) {
+                var yName = columns.get(c).getText();
+                var series = new javafx.scene.chart.XYChart.Series();
+                series.setName(yName);
+
+                for (var i = 0; i &lt; dataList.size(); i++) {
+                    var row = dataList.get(i);
+                    var xVal = row.get(xName);
+                    var yVal = row.get(yName);
+
+                    if (xVal != null &amp;&amp; yVal != null) {
+                        var numVal = parseFloat(yVal);
+                        if (!isNaN(numVal)) {
+                            series.getData().add(new javafx.scene.chart.XYChart.Data(xVal, numVal));
+                        }
+                    }
+                }
+                wykres.getData().add(series);
+            }
+        }
+
+        function initializeLayout() {
+            table.setItems(dataList);
+            refreshChart();
+        }
+
+        javafx.application.Platform.runLater(function () {
+            initializeLayout();
+        });
+    </fx:script>
+
+    <children>
+        <TableView fx:id="table" layoutX="14.0" layoutY="66.0" prefHeight="393.0" prefWidth="334.0" editable="true">
+            <columns>
+                <TableColumn fx:id="colC1" prefWidth="80.0" text="C1" onEditCommit="onCellEdit(event)">
+                    <cellValueFactory><MapValueFactory key="C1" /></cellValueFactory>
+                    <cellFactory><TextFieldTableCell fx:factory="forTableColumn" /></cellFactory>
+                </TableColumn>
+
+                <TableColumn fx:id="colC2" prefWidth="80.0" text="C2" onEditCommit="onCellEdit(event)">
+                    <cellValueFactory><MapValueFactory key="C2" /></cellValueFactory>
+                    <cellFactory><TextFieldTableCell fx:factory="forTableColumn" /></cellFactory>
+                </TableColumn>
+
+                <TableColumn fx:id="colC3" prefWidth="80.0" text="C3" onEditCommit="onCellEdit(event)">
+                    <cellValueFactory><MapValueFactory key="C3" /></cellValueFactory>
+                    <cellFactory><TextFieldTableCell fx:factory="forTableColumn" /></cellFactory>
+                </TableColumn>
+            </columns>
+        </TableView>
+
+        <Button layoutX="14.0" layoutY="466.0" mnemonicParsing="false" onAction="onAddRowBtnClicked(event)" text="Dodaj wiersz" />
+        <Button layoutX="107.0" layoutY="466.0" mnemonicParsing="false" onAction="onDelRowBtnClicked(event)" text="Usuń wiersz" />
+
+        <TextField fx:id="colNameTextField" layoutX="107.0" layoutY="29.0" prefHeight="25.0" prefWidth="41.0" />
+        <Button layoutX="160.0" layoutY="29.0" mnemonicParsing="false" onAction="onDelColBtnClicked(event)" text="Usuń" />
+        <Button layoutX="212.0" layoutY="29.0" mnemonicParsing="false" onAction="onAddColBtnClicked(event)" text="Dodaj" />
+        <Label layoutX="14.0" layoutY="33.0" text="Nazwa kolumny:" />
+
+        <AreaChart fx:id="wykres" layoutX="364.0" layoutY="63.0">
+            <xAxis>
+                <CategoryAxis fx:id="xAxis" side="BOTTOM" />
+            </xAxis>
+            <yAxis>
+                <NumberAxis fx:id="yAxis" side="LEFT" />
+            </yAxis>
+        </AreaChart>
+
+        <Label layoutX="408.0" layoutY="33.0" text="Tytuł wykresu:" />
+        <TextField fx:id="titleTextField" layoutX="492.0" layoutY="29.0" prefHeight="25.0" prefWidth="140.0" onKeyReleased="onTitleChanged(event)" />
+
+        <Label layoutX="660.0" layoutY="33.0" text="Oś X:" />
+        <TextField fx:id="xAxisInputTextField" layoutX="650.0" layoutY="29.0" prefHeight="25.0" prefWidth="140.0" onKeyReleased="onXAxisChanged(event)" />
+    </children>
+</Pane>

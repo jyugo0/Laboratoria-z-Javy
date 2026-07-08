@@ -1,0 +1,16 @@
+pwr\karmil\lab07catering\controller\MenuController.class
+pwr\karmil\lab07catering\database\MenuRepository.class
+pwr\karmil\lab07catering\Lab07CateringApplication.class
+pwr\karmil\lab07catering\database\User.class
+pwr\karmil\lab07catering\database\Order.class
+pwr\karmil\lab07catering\controller\OrderElementController.class
+pwr\karmil\lab07catering\controller\OrderController.class
+pwr\karmil\lab07catering\database\UserRepository.class
+pwr\karmil\lab07catering\dto\ElementsSelection.class
+pwr\karmil\lab07catering\database\OrderRepository.class
+pwr\karmil\lab07catering\database\OrderElementRepository.class
+pwr\karmil\lab07catering\controller\UserController.class
+pwr\karmil\lab07catering\database\OrderElement.class
+pwr\karmil\lab07catering\controller\AdminController.class
+pwr\karmil\lab07catering\database\Menu.class
+pwr\karmil\lab07catering\dto\OrderRequest.class
